@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | LearnSpace</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #eaf3ff, #f4f8ff, #e8f8f5);
+    min-height: 100vh;
+    color: #24324a;
+}
+
+header {
+    background: white;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #2864dc;
+    text-decoration: none;
+}
+
+.home-link {
+    text-decoration: none;
+    color: #526078;
+    font-size: 14px;
+}
+
+.container {
+    min-height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    background: white;
+    padding: 38px;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(40,100,220,0.10);
+}
+
+.login-card h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7b879a;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #dce3ee;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #2864dc;
+    box-shadow: 0 0 0 3px rgba(40,100,220,0.10);
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background: #2864dc;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.login-button:hover {
+    background: #174dbb;
+}
+
+.register-text {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 14px;
+    color: #718096;
+}
+
+.register-text a {
+    color: #2864dc;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+@media (max-width: 500px) {
+    .login-card {
+        padding: 27px 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="learnspace.html" class="logo">LearnSpace.</a>
+    <a href="learnspace.html" class="home-link">← Back to Home</a>
+</header>
+
+<main class="container">
+
+    <div class="login-card">
+
+        <h1>Welcome Back!</h1>
+
+        <p class="subtitle">
+            Sign in to continue your learning journey.
+        </p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-button">
+                Sign In
+            </button>
+
+        </form>
+
+        <p id="message"></p>
+
+        <p class="register-text">
+            Don't have an account?
+            <a href="registration.html">Create Account</a>
+        </p>
+
+    </div>
+
+</main>
+
+<script>
+document.getElementById("loginForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("message").style.color = "#2864dc";
+
+    document.getElementById("message").textContent =
+        "Login interface working! Backend authentication will be connected later.";
+
+});
+</script>
+
+</body>
+</html>

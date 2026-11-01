@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Account | LearnSpace</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #eaf3ff, #f4f8ff, #e8f8f5);
+    min-height: 100vh;
+    color: #24324a;
+}
+
+/* HEADER */
+
+header {
+    background: white;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #2864dc;
+    text-decoration: none;
+}
+
+.home-link {
+    text-decoration: none;
+    color: #526078;
+    font-size: 14px;
+}
+
+/* REGISTRATION CONTAINER */
+
+.container {
+    min-height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 460px;
+    background: white;
+    padding: 38px;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(40,100,220,0.10);
+}
+
+.register-card h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7b879a;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #dce3ee;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #2864dc;
+    box-shadow: 0 0 0 3px rgba(40,100,220,0.10);
+}
+
+.register-button {
+    width: 100%;
+    padding: 14px;
+    background: #2864dc;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.register-button:hover {
+    background: #174dbb;
+}
+
+.login-text {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 14px;
+    color: #718096;
+}
+
+.login-text a {
+    color: #2864dc;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+    .register-card {
+        padding: 27px 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="learnspace.html" class="logo">LearnSpace.</a>
+    <a href="learnspace.html" class="home-link">← Back to Home</a>
+</header>
+
+<main class="container">
+
+    <div class="register-card">
+
+        <h1>Create Account</h1>
+
+        <p class="subtitle">
+            Join LearnSpace and begin your learning journey.
+        </p>
+
+        <form id="registrationForm">
+
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input
+                    type="text"
+                    id="fullname"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Re-enter your password"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="register-button">
+                Create Account
+            </button>
+
+        </form>
+
+        <p id="message"></p>
+
+        <p class="login-text">
+            Already have an account?
+            <a href="login.html">Sign In</a>
+        </p>
+
+    </div>
+
+</main>
+
+
+<script>
+const form = document.getElementById("registrationForm");
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const fullname = document.getElementById("fullname").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    const message = document.getElementById("message");
+
+    if (password !== confirmPassword) {
+        message.style.color = "red";
+        message.textContent = "Passwords do not match.";
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:3000/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fullname: fullname,
+                email: email,
+                password: password
+            })
+        });
+
+        const result = await response.json();
+
+        message.style.color = "#2864dc";
+        message.textContent = result.message;
+
+    } catch (error) {
+        message.style.color = "red";
+        message.textContent = "Could not connect to LearnSpace server.";
+        console.error(error);
+    }
+
+});
+</script>
+
+
+</body>
+</html>
